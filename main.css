@@ -23,7 +23,6 @@ body {
     border-radius: 48px;
     box-shadow: 0 30px 60px -20px rgba(10, 40, 70, 0.3);
     overflow: hidden;
-    transition: all 0.2s;
     flex-wrap: wrap;
 }
 
@@ -35,10 +34,26 @@ body {
     color: #ecf3fc;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     position: relative;
     isolation: isolate;
     min-width: 300px;
+    height: 90vh;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.info-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.info-panel::-webkit-scrollbar-track {
+    background: #1f364b;
+    border-radius: 10px;
+}
+
+.info-panel::-webkit-scrollbar-thumb {
+    background: #1d90f5;
+    border-radius: 10px;
 }
 
 .info-panel::after {
@@ -57,7 +72,9 @@ body {
     flex-wrap: wrap;
 }
 
-.uni-icon { font-size: 2.5rem; }
+.uni-icon { 
+    font-size: 2.5rem; 
+}
 
 .uni-badge h2 {
     font-weight: 600;
@@ -87,7 +104,7 @@ body {
 
 .feature-list {
     list-style: none;
-    margin: 1rem 0 1.8rem;
+    margin: 1rem 0 1rem;
 }
 
 .feature-list li {
@@ -154,6 +171,7 @@ body {
     padding: 14px 18px;
     border-radius: 40px;
     margin-top: 18px;
+    margin-bottom: 0;
     backdrop-filter: blur(8px);
     display: flex;
     align-items: center;
@@ -162,7 +180,9 @@ body {
     flex-wrap: wrap;
 }
 
-.cursor-emoji { font-size: 1.8rem; }
+.cursor-emoji { 
+    font-size: 1.8rem; 
+}
 
 /* ===== RIGHT SIDE ===== */
 .form-panel {
@@ -170,9 +190,25 @@ body {
     background: #ffffff;
     padding: 2rem 2rem;
     max-height: 90vh;
+    height: 90vh;
     overflow-y: auto;
     position: relative;
     min-width: 320px;
+    scrollbar-width: thin;
+}
+
+.form-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.form-panel::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.form-panel::-webkit-scrollbar-thumb {
+    background: #1f6eeb;
+    border-radius: 10px;
 }
 
 .form-header {
@@ -200,7 +236,9 @@ body {
     gap: 18px 20px;
 }
 
-.form-group.full-width { grid-column: 1 / -1; }
+.form-group.full-width { 
+    grid-column: 1 / -1; 
+}
 
 .form-group label {
     display: flex;
@@ -270,7 +308,7 @@ button {
     font-size: 1.3rem;
     font-weight: 600;
     cursor: pointer;
-    margin: 28px 0 12px;
+    margin: 28px 0 0;
     box-shadow: 0 12px 22px -8px #142e4b;
     transition: 0.15s;
 }
@@ -292,13 +330,42 @@ button:hover {
 }
 
 #result {
-    margin-top: 20px;
+    margin-top: 15px;
+    margin-bottom: 0;
     background: #23374d;
     border-radius: 24px;
     padding: 18px;
     border: 1px solid #b4d0ff;
     display: none;
     font-size: 0.95rem;
+    color: #ecf3fc;
+    line-height: 1.6;
+    max-height: 250px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+#result::-webkit-scrollbar {
+    width: 4px;
+}
+
+#result::-webkit-scrollbar-track {
+    background: #1f364b;
+    border-radius: 10px;
+}
+
+#result::-webkit-scrollbar-thumb {
+    background: #1d90f5;
+    border-radius: 10px;
+}
+
+#result strong {
+    color: #ffefc0;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #6082b0;
+    padding-bottom: 8px;
 }
 
 /* KID ON RIGHT SIDE (hover appear) */
@@ -327,13 +394,32 @@ button:hover {
     transform: scale(1) rotate(0deg);
 }
 
+/* Form panel last element spacing fix */
+.form-panel > *:last-child {
+    margin-bottom: 0;
+}
+
+#myForm {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
 /* responsive breakpoints */
 @media (max-width: 700px) {
     .split-card { border-radius: 36px; }
-    .info-panel { padding: 2rem 1.5rem; }
-    .form-panel { padding: 2rem 1.5rem; }
+    .info-panel { 
+        padding: 2rem 1.5rem;
+        height: auto;
+        max-height: 50vh;
+    }
+    .form-panel { 
+        padding: 2rem 1.5rem;
+        height: auto;
+        max-height: 50vh;
+    }
     .kid-on-right { bottom: 15px; right: 15px; }
     .image-strip { gap: 8px; }
+    #result { max-height: 200px; }
 }
 
 @media (max-width: 500px) {
@@ -343,6 +429,10 @@ button:hover {
     .info-quote { font-size: 1.3rem; }
     .kid-image { width: 50px; height: 50px; }
     .mouse-note { font-size: 0.85rem; }
+    #result { 
+        max-height: 180px;
+        padding: 14px;
+    }
 }
 
 @media (max-width: 380px) {
@@ -352,5 +442,16 @@ button:hover {
     }
     .feature-list li { 
         width: 100%; 
+    }
+    #result {
+        max-height: 150px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .info-panel, .form-panel {
+        height: auto;
+        max-height: 70vh;
     }
 }

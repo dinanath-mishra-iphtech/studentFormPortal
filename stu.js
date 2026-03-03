@@ -1,6 +1,4 @@
-
 (function () {
-
 
   // ===== FORM HANDLING =====
   const form = document.getElementById('myForm');
@@ -37,62 +35,158 @@
   }
 
   function getStudyMode() {
-    for (let r of studyRadios) if (r.checked) return r.value;
-    return 'fulltime';
+    for (let r of studyRadios) {
+      if (r.checked) return r.value;
+    }
+    return null;
   }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    let isValid = true;
+
+    // clear old errors
+    document.querySelectorAll('.errMssg').forEach(span => span.textContent = '');
+    document.querySelectorAll('input, select, textarea')
+      .forEach(el => el.style.border = '1px solid #ccc');
+
+    function setError(input, message) {
+      const errorSpan = input.parentElement.querySelector('.errMssg');
+      if (errorSpan) errorSpan.textContent = message;
+      input.style.border = '2px solid red';
+      isValid = false;
+    }
+
+    function setSuccess(input) {
+      input.style.border = '2px solid green';
+    }
+
+    // ===== NAME =====
     if (!name.value.trim()) {
-      showMessage('name required', false); name.focus(); return;
+      setError(name, 'Name required');
+    } else if (name.value.trim().length < 3) {
+      setError(name, 'Minimum 3 characters');
+    } else {
+      setSuccess(name);
     }
-    if (!email.value.includes('@')) {
-      showMessage('valid email required', false); email.focus(); return;
+
+    // ===== EMAIL =====
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/;
+    if (!email.value.trim()) {
+      setError(email, 'Email required');
+    } else if (!emailPattern.test(email.value.trim())) {
+      setError(email, 'Invalid email');
+    } else {
+      setSuccess(email);
     }
+
+    // ===== PHONE =====
     if (!/^[0-9]{10}$/.test(phone.value.trim())) {
-      showMessage('Enter valid 10 digit number', false);
-      phone.focus();
+      setError(phone, 'Enter valid 10 digit number');
+    } else {
+      setSuccess(phone);
+    }
+
+    // ===== GENDER =====
+    if (!gender.value) {
+      setError(gender, 'Select gender');
+    } else {
+      setSuccess(gender);
+    }
+
+    // ===== DOB =====
+    if (!dob.value) {
+      setError(dob, 'Select DOB');
+    } else {
+      const birthDate = new Date(dob.value);
+      const today = new Date();
+
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+
+      if (
+        monthDiff < 0 ||
+        (monthDiff === 0 && today.getDate() < birthDate.getDate())
+      ) {
+        age--;
+      }
+
+      if (age < 16) {
+        setError(dob, 'Minimum age 16');
+      } else {
+        setSuccess(dob);
+      }
+    }
+
+    // ===== COURSE =====
+    if (!course.value) {
+      setError(course, 'Select course');
+    } else {
+      setSuccess(course);
+    }
+
+    // ===== ADDRESS =====
+    if (!address.value.trim()) {
+      setError(address, 'Address required');
+    } else if (address.value.trim().length < 10) {
+      setError(address, 'Minimum 10 characters');
+    } else {
+      setSuccess(address);
+    }
+
+    // ===== INTERESTS =====
+    const interestGroup = interest1.closest('.form-group');
+    if (!interest1.checked && !interest2.checked &&
+        !interest3.checked && !interest4.checked) {
+      interestGroup.querySelector('.errMssg').textContent =
+        'Select at least one interest';
+      isValid = false;
+    }
+
+    // ===== STUDY MODE =====
+    let modeSelected = false;
+    for (let r of studyRadios) {
+      if (r.checked) modeSelected = true;
+    }
+
+    if (!modeSelected) {
+      studyRadios[0].closest('.form-group')
+        .querySelector('.errMssg').textContent =
+        'Select study mode';
+      isValid = false;
+    }
+
+    if (!isValid) {
+      showMessage('❌ Fill all fields first', false);
       return;
     }
 
-    if (!gender.value) {
-      showMessage('gender required', false); gender.focus(); return;
-    }
-
-
-    showMessage('✅ registration', true);
+    // ===== SUCCESS =====
+    showMessage('✅ Registration Successful', true);
 
     const interests = getInterests();
-    const mode = getStudyMode();
+    const mode = getStudyMode() || '—';
     const dobVal = dob.value || '—';
-    const courseVal = course.value ? course.options[course.selectedIndex].text : '—';
+    const courseVal = course.options[course.selectedIndex].text;
 
     resultDiv.innerHTML = `
-                    <strong>📋 summary</strong><br>
-                    👤 ${name.value.trim()} <br>
-                    📧 ${email.value.trim()} <br>
-                    📞 ${phone.value.trim() || '—'}<br>
-                    ⚥ ${gender.value} <br>
-                    🎂 ${dobVal} <br>
-                    📚 ${courseVal} <br>
-                    🏠 ${address.value.trim() || '—'}<br>
-                    🧩 ${interests}<br>
-                    ⏰ ${mode}
-                `;
-    resultDiv.style.display = 'block';
+      <strong>📋 Registration Summary</strong><br>
+      👤 ${name.value.trim()} <br>
+      📧 ${email.value.trim()} <br>
+      📞 ${phone.value.trim()}<br>
+      ⚥ ${gender.value} <br>
+      🎂 ${dobVal} <br>
+      📚 ${courseVal} <br>
+      🏠 ${address.value.trim()}<br>
+      🧩 ${interests}<br>
+      ⏰ ${mode}
+    `;
 
-    // Fun bounce effect for moving images on submit
-    if (window.lastDrift) {
-      img1.style.transform = `rotate(-2deg) translate(${window.lastDrift.x1}px, -12px)`;
-      img2.style.transform = `rotate(1deg) translate(${window.lastDrift.x2}px, -12px)`;
-      img3.style.transform = `rotate(3deg) translate(${window.lastDrift.x3}px, -12px)`;
-      setTimeout(() => {
-        img1.style.transform = `rotate(-2deg) translate(${window.lastDrift.x1}px, ${window.lastDrift.y1}px)`;
-        img2.style.transform = `rotate(1deg) translate(${window.lastDrift.x2}px, ${window.lastDrift.y2}px)`;
-        img3.style.transform = `rotate(3deg) translate(${window.lastDrift.x3}px, ${window.lastDrift.y3}px)`;
-      }, 180);
-    }
+    resultDiv.style.display = 'block';
+    
+    // Optional: Scroll to result
+    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   });
 
   // Welcome message
@@ -102,4 +196,5 @@
     msgDiv.style.background = '#e3efff';
     setTimeout(() => { msgDiv.style.display = 'none'; }, 2800);
   });
+
 })();

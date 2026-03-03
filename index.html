@@ -1,56 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>enroll · moving images + kid hover</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    
+
 </head>
+
 <body>
     <div class="split-card">
         <!-- LEFT panel with MOVING IMAGES (cursor follows restored) -->
         <div class="info-panel">
-    <div>
-        <div class="uni-badge">
-            <span class="uni-icon">📘</span>
-            <h2>northfield college</h2>
-        </div>
-        <div class="info-quote">
-            est. 1965 · 3,200 students<br><span>accredited · 94% placement</span>
-        </div>
-        <ul class="feature-list">
-            <li><span>✓</span> 40+ undergraduate programs</li>
-            <li><span>✓</span> average class size: 18</li>
-            <li><span>✓</span> $15M in scholarships</li>
-            <div id="result"></div>
-        </ul>
-    </div>
+            <div>
+                <div class="uni-badge">
+                    <span class="uni-icon">📘</span>
+                    <h2>Northfield College</h2>
+                </div>
+                <div class="info-quote">
+                    est. 1965 · 3,200 students<br><span>accredited · 94% placement</span>
+                </div>
+                <ul class="feature-list">
+                    <li><span>✓</span> 40+ undergraduate programs</li>
+                    <li><span>✓</span> average class size: 18</li>
+                    <li><span>✓</span> $15M in scholarships</li>
+                </ul>
+                <div id="result"></div>
+            </div>
 
-    <!-- THREE IMAGES THAT MOVE WITH CURSOR -->
-    <div class="image-strip">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='45' r='40' fill='%233d5a80'/%3E%3Ccircle cx='30' cy='35' r='5' fill='%23ffffff'/%3E%3Ccircle cx='70' cy='35' r='5' fill='%23ffffff'/%3E%3Cpath d='M35 70 Q50 85, 65 70' stroke='%23f9c74f' stroke-width='5' fill='none' /%3E%3Ctext x='20' y='90' fill='%23ffffff' font-size='14' font-weight='bold'%3Eclass '24%3C/text%3E%3C/svg%3E"
-             alt="student 1" class="kid-image" id="img1">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='45' r='40' fill='%235a7c9a'/%3E%3Ccircle cx='35' cy='35' r='5' fill='%23ffffff'/%3E%3Ccircle cx='65' cy='35' r='5' fill='%23ffffff'/%3E%3Cpath d='M30 70 Q50 88, 70 70' stroke='%2390be6d' stroke-width='5' fill='none' /%3E%3Ctext x='20' y='90' fill='%23ffffff' font-size='14' font-weight='bold'%3Eclass '25%3C/text%3E%3C/svg%3E"
-             alt="student 2" class="kid-image" id="img2">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='45' r='40' fill='%23365f7e'/%3E%3Ccircle cx='30' cy='35' r='5' fill='%23ffffff'/%3E%3Ccircle cx='70' cy='35' r='5' fill='%23ffffff'/%3E%3Cpath d='M40 72 Q50 82, 60 72' stroke='%23f9844a' stroke-width='5' fill='none' /%3E%3Ctext x='20' y='90' fill='%23ffffff' font-size='14' font-weight='bold'%3Eclass '26%3C/text%3E%3C/svg%3E"
-             alt="student 3" class="kid-image" id="img3">
-    </div>
+            <!-- THREE IMAGES THAT MOVE WITH CURSOR -->
+            <div class="image-strip">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='45' r='40' fill='%233d5a80'/%3E%3Ccircle cx='30' cy='35' r='5' fill='%23ffffff'/%3E%3Ccircle cx='70' cy='35' r='5' fill='%23ffffff'/%3E%3Cpath d='M35 70 Q50 85, 65 70' stroke='%23f9c74f' stroke-width='5' fill='none' /%3E%3Ctext x='20' y='90' fill='%23ffffff' font-size='14' font-weight='bold'%3Eclass '24%3C/text%3E%3C/svg%3E"
+                    alt="student 1" class="kid-image" id="img1">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='45' r='40' fill='%235a7c9a'/%3E%3Ccircle cx='35' cy='35' r='5' fill='%23ffffff'/%3E%3Ccircle cx='65' cy='35' r='5' fill='%23ffffff'/%3E%3Cpath d='M30 70 Q50 88, 70 70' stroke='%2390be6d' stroke-width='5' fill='none' /%3E%3Ctext x='20' y='90' fill='%23ffffff' font-size='14' font-weight='bold'%3Eclass '25%3C/text%3E%3C/svg%3E"
+                    alt="student 2" class="kid-image" id="img2">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='45' r='40' fill='%23365f7e'/%3E%3Ccircle cx='30' cy='35' r='5' fill='%23ffffff'/%3E%3Ccircle cx='70' cy='35' r='5' fill='%23ffffff'/%3E%3Cpath d='M40 72 Q50 82, 60 72' stroke='%23f9844a' stroke-width='5' fill='none' /%3E%3Ctext x='20' y='90' fill='%23ffffff' font-size='14' font-weight='bold'%3Eclass '26%3C/text%3E%3C/svg%3E"
+                    alt="student 3" class="kid-image" id="img3">
+            </div>
 
-    <div class="mouse-note">
-        <span class="cursor-emoji">🖱️</span>
-        <span> apply now for fall 2026</span>
-    </div>
-</div>
+            <div class="mouse-note">
+                <span class="cursor-emoji">🖱️</span>
+                <span> Apply now for fall 2026</span>
+            </div>
+        </div>
 
         <!-- RIGHT panel: form + hidden kid image -->
         <div class="form-panel">
             <!-- Your kid image (replace src with your own) -->
-            <img src="images/images1.jpeg"
-                 alt="kid character" class="kid-on-right" id="rightKidImage">
+            <img src="images/images1.jpeg" alt="kid character" class="kid-on-right" id="rightKidImage">
 
             <div class="form-header">
-                <h3>student registr ation</h3>
+                <h3>Student Registration</h3>
                 <p>→ Your Data appears on right</p>
             </div>
 
@@ -60,28 +61,34 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label>👤 full name</label>
-                        <input type="text" id="name" placeholder="Alex Rivera" required>
+                        <input type="text" id="name" placeholder="Alex Rivera">
+                        <span class="errMssg"></span>
                     </div>
+
                     <div class="form-group">
                         <label>📧 email</label>
-                        <input type="email" id="email" placeholder="alex@college.edu" required>
+                        <input type="email" id="email" placeholder="alex@college.edu">
+                        <span class="errMssg"></span>
                     </div>
                     <div class="form-group">
                         <label>📞 contact</label>
                         <input type="number" id="phone" placeholder="9876543210">
+                        <span class="errMssg"></span>
                     </div>
                     <div class="form-group">
                         <label>⚥ gender</label>
-                        <select id="gender" required>
+                        <select id="gender">
                             <option value="">-- select --</option>
                             <option value="male">male</option>
                             <option value="female">female</option>
                             <option value="other">other</option>
                         </select>
+                        <span class="errMssg"></span>
                     </div>
                     <div class="form-group">
                         <label>🎂 date of birth</label>
                         <input type="date" id="dob">
+                        <span class="errMssg"></span>
                     </div>
                     <div class="form-group">
                         <label>📚 course</label>
@@ -91,37 +98,48 @@
                             <option value="eng">engineering</option>
                             <option value="bba">business</option>
                         </select>
+                        <span class="errMssg"></span>
                     </div>
                     <div class="form-group full-width">
                         <label>🏠 address</label>
                         <textarea id="address" placeholder="street, city, code"></textarea>
+                        <span class="errMssg"></span>
                     </div>
                     <div class="form-group full-width">
                         <label>🧩 interests</label>
                         <div class="checkbox-group">
-                            <label class="checkbox-item"><input type="checkbox" id="interest1" value="coding"> coding</label>
-                            <label class="checkbox-item"><input type="checkbox" id="interest2" value="sports"> sports</label>
-                            <label class="checkbox-item"><input type="checkbox" id="interest3" value="music"> music</label>
+                            <label class="checkbox-item"><input type="checkbox" id="interest1" value="coding">
+                                coding</label>
+                            <label class="checkbox-item"><input type="checkbox" id="interest2" value="sports">
+                                sports</label>
+                            <label class="checkbox-item"><input type="checkbox" id="interest3" value="music">
+                                music</label>
                             <label class="checkbox-item"><input type="checkbox" id="interest4" value="art"> art</label>
                         </div>
+                        <span class="errMssg"></span>
                     </div>
                     <div class="form-group full-width">
                         <label>⏰ study mode</label>
                         <div class="radio-group">
-                            <label class="radio-item"><input type="radio" name="studyMode" value="fulltime" checked> full‑time</label>
-                            <label class="radio-item"><input type="radio" name="studyMode" value="parttime"> part‑time</label>
-                            <label class="radio-item"><input type="radio" name="studyMode" value="online"> online</label>
+                            <label class="radio-item"><input type="radio" name="studyMode" value="fulltime" checked>
+                                full‑time</label>
+                            <label class="radio-item"><input type="radio" name="studyMode" value="parttime">
+                                part‑time</label>
+                            <label class="radio-item"><input type="radio" name="studyMode" value="online">
+                                online</label>
                         </div>
+                        <span class="errMssg"></span>
                     </div>
                 </div>
 
                 <button type="submit" id="registerBtn">register →</button>
             </form>
 
-            
+
         </div>
     </div>
-    
-   <script src="stu.js"></script>
+
+    <script src="stu.js"></script>
 </body>
+
 </html>
